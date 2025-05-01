@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Gravity : MonoBehaviour
+{
+    public float gravityScale = 1.0f;
+    public static float globalGravity = -9.81f;
+    Rigidbody m_rb;
+
+    void OnEnable()
+    {
+        m_rb = GetComponent<Rigidbody>();//Get player rigidbody component
+        m_rb.useGravity = false;         //Disable player gravity
+    }
+
+    void FixedUpdate()//Use custom gravity to change how quickly the player falls to the ground and how high the player is capable of jumping
+    {
+        Vector3 gravity = globalGravity * gravityScale * Vector3.up;
+        m_rb.AddForce(gravity, ForceMode.Acceleration);
+    }
+}
